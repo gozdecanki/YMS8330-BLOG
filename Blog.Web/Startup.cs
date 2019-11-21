@@ -23,7 +23,7 @@ namespace Blog.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<BlogContext>(options => options.UseSqlServer("Server=localhost;Database=YMS8330_Blog;User Id=as;Password = 123;"));
+            services.AddDbContext<BlogContext>(options => options.UseSqlServer("Server=localhost;Database=YMS8330_Blog;User Id=sa;Password = 123;"));
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
