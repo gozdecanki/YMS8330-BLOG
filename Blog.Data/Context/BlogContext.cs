@@ -11,6 +11,7 @@ namespace Blog.Data.Context
         //tabloları veri tabanı için oluşturmak için bu kısımda tanıtıyoruz
         public DbSet <User> Users { get; set; }
         public DbSet<Blog.Data.Models.Blog> Blogs { get; set; }
-
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Page> Pages { get; set; }
     }
 }
