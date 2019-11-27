@@ -55,5 +55,40 @@ var Page = {
             alert("Validation error!");
         },
 
+    },
+    User: {
+
+        Login: {
+            LoginButton: function () {
+                var email = $("#Email").val();
+                var password = $("#Password").val();
+
+                var data = {
+                    Email: email,
+                    Password: password
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/User/LoginAction",
+                    data: JSON.stringify(data),
+                    success: Page.User.Login.LoginButton_Calback,
+                    error: Page.User.Login.LoginButton_Calback_Error,
+                    dataType: "json",
+                    contentType: "application/json"
+
+                });
+
+            },
+            LoginButton_Calback: function (result) {
+                alert(result);
+            },
+            LoginButton_Calback_Error: function (request,status,error) {
+                console.log(error);
+                console.log(status);
+                console.log(request);
+            }
+        }
     }
-}
+
+    }
