@@ -4,3 +4,6 @@ update-database -Context "BlogContext" -StartupProject "Blog.Web" -Project "Blog
 
 
 remove-migration -Context "BlogContext" -StartupProject "Blog.Web" -Project "Blog.Data"
+
+
+add-migration Seed -Context "BlogContext" -StartupProject "Blog.Web" -Project "Blog.Data"
