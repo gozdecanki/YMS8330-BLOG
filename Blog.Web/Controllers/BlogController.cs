@@ -33,15 +33,22 @@ namespace Blog.Web.Controllers
                 Title = blogAdd.Title,
                 Content = blogAdd.Content,
                 CreateDate = DateTime.UtcNow,
-                Hit=0,
-                Deleted=false,
-                CategoryId=1
+                Hit = 0,
+                Deleted = false,
+                CategoryId = blogAdd.CategoryId
             };
 
             _blogContext.Blogs.Add(blog);
-            return Ok();
+            _blogContext.SaveChanges();
+            return Ok(blog);
         }
 
+        public IActionResult Detail(int id)//blogun id si
+        {
+            var blog = _blogContext.Blogs.Find(id);
+
+            return View(blog);
+        }
 
     }
 }

@@ -1,6 +1,20 @@
 ﻿
 
 var Page = {
+    Init: function() {
+        $.ajax({
+            type: "GET",
+            url: "/Module/Categories",
+            data: [],
+            success: function (result) {
+                $("#Module-Categories").html(result);
+            },
+            dataType: "html"
+            
+
+        });
+
+    },
     Contact: {
         Send: function () {
        
@@ -97,10 +111,12 @@ var Page = {
             {
                 var title = $("#Title").val();
                 var content = $("#Content").val();
+                var categoryId = parseInt($("#Category").val());
 
                 var data= {
                     Title: title,
-                    Content: content
+                    Content: content,
+                    CategoryId:categoryId
                 };
 
                 $.ajax({
@@ -116,9 +132,11 @@ var Page = {
 
             },
             Save_Callback: function (result) {
-                console.log(result);
+                window.location.href = "/blog/detail/" + result.id;
+
+        
             },
-            Save_Callback: function (request, status, error) {
+            Save_Callback_Error: function (request, status, error) {
                 console.log(request);
                 console.log(status);
                 console.log(error);
