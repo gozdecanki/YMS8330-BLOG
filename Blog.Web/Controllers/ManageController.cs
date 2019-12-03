@@ -1,0 +1,22 @@
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace Blog.Web.Controllers
+{
+    public class ManageController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult LoginAction()
+        {
+            return new JsonResult("ok");
+        }
+    }
+}

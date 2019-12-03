@@ -143,6 +143,31 @@ var Page = {
             }
 
         }
+    },
+
+    Manage: {
+        Login: {
+            Submit: function () {
+                var email = $("#Email").val();
+                var password = $("#Password").val();
+
+                var data = {
+                    Email: email,
+                    Password: password
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Manage/LoginAction",
+                    data: JSON.stringify(data),
+                    success: Page.Manage.Login.Submit_Callback,
+                    error: Page.Manage.Login.Submit_Callback_Error,
+                    dataType: "json",
+                    contentType:"application/json"
+                });
+            }
+        }
+      
     }
 
 }
