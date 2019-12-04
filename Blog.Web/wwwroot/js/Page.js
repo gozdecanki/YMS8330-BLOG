@@ -165,6 +165,49 @@ var Page = {
                     dataType: "json",
                     contentType:"application/json"
                 });
+            },
+
+            Submit_Callback: function (result) {
+                window.location.href = "/Manage/Index";
+
+            },
+            Submit_Callback_Error: function (result) {
+                console.log(result );
+               
+            }
+
+        },
+
+        NewBlog: {
+            Save: function () {
+                var categoryId = $("#CategoryId").val();
+                var title = $("#Title").val();
+                var content = $("#Content").val();
+
+                var data = {
+                    Title: title,
+                    Content: content,
+                    CategoryId: categoryId
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Manage/NewBlogAction",
+                    data: JSON.stringify(data),
+                    success: Page.Manage.Login.Save_Callback,
+                    error: Page.Manage.Login.Save_Callback_Error,
+                    dataType: "json",
+                    contentType: "application/json"
+                });
+
+
+            },
+            Save_Callback: function (result) {
+                console.log(result);
+
+            },
+            Save_Callback_Error: function (result) {
+                console.log(result);
             }
         }
       
