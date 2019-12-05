@@ -5,8 +5,11 @@ using System.Text;
 
 namespace Blog.Data.Dto
 {
-   public class ManageNewBlogActionDto
-    {    [Required]
+   public class ManageBlogActionDto
+    {
+        public int Id { get; set; }
+
+        [Required]
         public int CategoryId { get; set; }
         [Required,MinLength(2),MaxLength(150)]
         public string Title { get; set; }
