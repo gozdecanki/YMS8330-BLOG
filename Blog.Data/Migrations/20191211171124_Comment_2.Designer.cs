@@ -4,14 +4,16 @@ using Blog.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Blog.Data.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    partial class BlogContextModelSnapshot : ModelSnapshot
+    [Migration("20191211171124_Comment_2")]
+    partial class Comment_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,8 +73,8 @@ namespace Blog.Data.Migrations
                     b.ToTable("Categories");
 
                     b.HasData(
-                        new { Id = 1, CreateDate = new DateTime(2019, 12, 11, 18, 16, 30, 576, DateTimeKind.Utc), Deleted = false, Description = "...", Name = "Aşk" },
-                        new { Id = 2, CreateDate = new DateTime(2019, 12, 11, 18, 16, 30, 577, DateTimeKind.Utc), Deleted = false, Description = "!!!!", Name = "Meşk" }
+                        new { Id = 1, CreateDate = new DateTime(2019, 12, 11, 17, 11, 24, 214, DateTimeKind.Utc), Deleted = false, Description = "...", Name = "Aşk" },
+                        new { Id = 2, CreateDate = new DateTime(2019, 12, 11, 17, 11, 24, 216, DateTimeKind.Utc), Deleted = false, Description = "!!!!", Name = "Meşk" }
                     );
                 });
 
@@ -112,7 +114,7 @@ namespace Blog.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comment");
                 });
 
             modelBuilder.Entity("Blog.Data.Models.Contact", b =>
@@ -155,7 +157,7 @@ namespace Blog.Data.Migrations
                     b.ToTable("Nationality");
 
                     b.HasData(
-                        new { Id = 1, Code = "Tr", CreateDate = new DateTime(2019, 12, 11, 18, 16, 30, 577, DateTimeKind.Utc), Deleted = false, Name = "Türkiye" }
+                        new { Id = 1, Code = "Tr", CreateDate = new DateTime(2019, 12, 11, 17, 11, 24, 216, DateTimeKind.Utc), Deleted = false, Name = "Türkiye" }
                     );
                 });
 
@@ -225,7 +227,7 @@ namespace Blog.Data.Migrations
                     b.ToTable("Users");
 
                     b.HasData(
-                        new { Id = 1, BirthDate = new DateTime(1992, 12, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), CreateDate = new DateTime(2019, 12, 11, 18, 16, 30, 578, DateTimeKind.Utc), Deleted = false, Email = "gozdecanki@gmail.com", Gender = 1, Name = "Gözde", NationalityId = 1, Password = "12345678", Surname = "Yılmaz", Username = "gozde" }
+                        new { Id = 1, BirthDate = new DateTime(1992, 12, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), CreateDate = new DateTime(2019, 12, 11, 17, 11, 24, 216, DateTimeKind.Utc), Deleted = false, Email = "gozdecanki@gmail.com", Gender = 1, Name = "Gözde", NationalityId = 1, Password = "12345678", Surname = "Yılmaz", Username = "gozde" }
                     );
                 });
 

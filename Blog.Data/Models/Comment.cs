@@ -5,6 +5,7 @@ namespace Blog.Data.Models
 {
   public  class Comment: Entity
     {
+        public int? ParentCommentId { get; set; }//commente cvp verildiği için
         public int BlogId { get; set; }
         public Blog Blog { get; set; }
 

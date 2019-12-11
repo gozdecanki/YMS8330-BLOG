@@ -18,6 +18,7 @@ namespace Blog.Data.Context
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(

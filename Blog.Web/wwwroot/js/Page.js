@@ -1,7 +1,7 @@
 ﻿
 
 var Page = {
-    Init: function() {
+    Init: function () {
         $.ajax({
             type: "GET",
             url: "/Module/Categories",
@@ -10,14 +10,14 @@ var Page = {
                 $("#Module-Categories").html(result);
             },
             dataType: "html"
-            
+
 
         });
 
     },
     Contact: {
         Send: function () {
-       
+
 
             var name = $("#Name").val();
             var surname = $("#Surname").val();
@@ -41,13 +41,13 @@ var Page = {
             var data = {
                 Name: name,
                 Surname: surname,
-                Message:message
+                Message: message
             };
 
             $.ajax({
                 type: "POST",
                 url: "/Contact/Send",
-                data: JSON.stringify( data),
+                data: JSON.stringify(data),
                 success: Page.Contact.Send_Callback,
                 error: Page.Contact.Send_Callback_Error,
                 dataType: "json",
@@ -62,7 +62,7 @@ var Page = {
             console.log(result);
         },
 
-        Send_Callback_Error: function (request,status,error) {
+        Send_Callback_Error: function (request, status, error) {
             $("#Contact-Index-Sending").hide();
             $("#Contact-Index-Sent").hide();
             $("#Contact-Index-Form").show();
@@ -70,19 +70,18 @@ var Page = {
         },
 
     },
-   
+
     Blog: {
         New: {
-            Save: function ()
-            {
+            Save: function () {
                 var title = $("#Title").val();
                 var content = $("#Content").val();
                 var categoryId = parseInt($("#Category").val());
 
-                var data= {
+                var data = {
                     Title: title,
                     Content: content,
-                    CategoryId:categoryId
+                    CategoryId: categoryId
                 };
 
                 $.ajax({
@@ -92,7 +91,7 @@ var Page = {
                     success: Page.Blog.New.Save_Callback,
                     error: Page.Blog.New.Save_Callback_Error,
                     dataType: "json",
-                    contentType:"application/json"
+                    contentType: "application/json"
 
                 });
 
@@ -100,7 +99,7 @@ var Page = {
             Save_Callback: function (result) {
                 window.location.href = "/blog/detail/" + result.id;
 
-        
+
             },
             Save_Callback_Error: function (request, status, error) {
                 console.log(request);
@@ -108,6 +107,52 @@ var Page = {
                 console.log(error);
             }
 
+        },
+        Detail: {
+            Comment: {
+                Post: function () {
+                    var nickname = $("#Nickname").val();
+                    var email = $("#Email").val();
+                    var comment = $("#Comment").val();
+                    var blogId = $("#BlogId").val();
+                    if (blogId == "0") {
+                        blogId = null;
+                    } 
+
+                    var parentCommentId = $("#ParentCommentId").val();
+                    $("#Comment-Respond").hide();
+                    $("#Comment-Sending").show();
+
+                    var data = {
+                        Nickname: nickname,
+                        Email: email,
+                        Comment: comment,
+                        BlogId: blogId,
+                        ParentCommentId: parentCommentId
+
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "/Blog/AddComment",
+                        data: JSON.stringify(data),
+                        success: Page.Blog.Detail.Comment.Post_Callback,
+                        error: Page.Blog.Detail.Comment.Post_Callback_Error,
+                        dataType: "json",
+                        contentType:"application/json"
+
+                    });
+
+                },
+                Post_Callback: function (result) {
+                    $("#Comment-Sending").hide();
+                    $("#Comment-Sent").show();
+                },
+                Post_Callback_Error: function (result) {
+                    alert("Bir hata oluştu!");
+                    $("#Comment-Sending").hide();
+                    $("#Comment-Respond").show();
+                }
+            }
         }
     },
 

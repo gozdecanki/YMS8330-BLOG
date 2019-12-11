@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
  using System.Collections.Generic;
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Web.Controllers
 {
@@ -45,10 +46,35 @@ namespace Blog.Web.Controllers
 
         public IActionResult Detail(int id)//blogun id si
         {
-            var blog = _blogContext.Blogs.Find(id);
+            var blog = _blogContext.Blogs
+                .Include(a=> a.User)
+                .Include(a=> a.Comments)
+                .SingleOrDefault(a=>a.Id==id);
 
             return View(blog);
         }
+
+        public IActionResult AddComment([FromBody] BlogAddCommentDto blogAddComment)
+        {
+
+            Data.Models.Comment comment = new Data.Models.Comment
+            {
+                BlogId=blogAddComment.BlogId,
+                CreateDate=DateTime.UtcNow,
+                Content=blogAddComment.Comment,
+                Deleted=false,
+                Email=blogAddComment.Email,
+                Nickname=blogAddComment.Nickname,
+                ParentCommentId=blogAddComment.ParentCommentId,
+                VoteUp=0,
+                DownUp=0
+            };
+
+            _blogContext.Comments.Add(comment);
+            _blogContext.SaveChanges();
+            return new JsonResult("ok");
+        }
+
 
     }
 }
