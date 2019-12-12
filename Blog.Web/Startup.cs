@@ -1,5 +1,6 @@
 ﻿
 using Blog.Data.Context;
+using Blog.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 
 namespace Blog.Web
 {
@@ -46,8 +48,12 @@ namespace Blog.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,IServiceProvider serviceProvider)
         {
+            BlogContext blogContext = serviceProvider.GetService<BlogContext>();
+            Program.Site  = blogContext.Sites.Single();
+
+
             app.UseSession();
 
             if (env.IsDevelopment())

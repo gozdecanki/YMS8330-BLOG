@@ -19,6 +19,7 @@ namespace Blog.Data.Context
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Site> Sites { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
@@ -75,7 +76,14 @@ namespace Blog.Data.Context
 
 
      });
-
+            modelBuilder.Entity<Site>().HasData(new Site()
+            {
+                Id=1,
+                Title="Gözde Cankı Erdoğan",
+                Description="benim blogum",
+                Slogan="Sayfama hoşgeldiniz",
+                Copyright="İçerik hırsızlığına hayır"
+            });
 
 
 
